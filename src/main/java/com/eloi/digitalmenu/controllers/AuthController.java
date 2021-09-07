@@ -1,11 +1,13 @@
 package com.eloi.digitalmenu.controllers;
 
+import com.eloi.digitalmenu.domain.models.payloads.request.SigninRequest;
 import com.eloi.digitalmenu.domain.models.payloads.request.SignupRequest;
 import com.eloi.digitalmenu.domain.models.payloads.response.MessageResponse;
 import com.eloi.digitalmenu.domain.services.AuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,5 +33,16 @@ public class AuthController {
         }
         
         return ResponseEntity.ok(new MessageResponse("Usuário registrado com sucesso."));
+    }
+
+    @PostMapping("token")
+    public ResponseEntity<?> login(@RequestBody SigninRequest signinRequest) {
+
+        try {
+            String jwt = authService.login(signinRequest.getUsername(), signinRequest.getPassword());
+            return ResponseEntity.ok(jwt);
+        } catch (BadCredentialsException ex) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Credenciais inválidas."));
+        }
     }
 }
