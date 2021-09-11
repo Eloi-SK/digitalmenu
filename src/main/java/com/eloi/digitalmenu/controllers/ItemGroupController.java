@@ -44,7 +44,7 @@ public class ItemGroupController {
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ItemGroupRequest model) {
         try {
             var itemGroup = itemGroupService.getItemGroup(id);
-            itemGroup = model.map(itemGroup);
+            itemGroup = model.mapTo(itemGroup);
             itemGroupService.updateItemGroup(itemGroup);
             return ResponseEntity.ok(itemGroup);
         } catch (Exception ex) {
