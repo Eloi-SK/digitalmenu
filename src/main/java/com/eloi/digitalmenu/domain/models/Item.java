@@ -27,6 +27,10 @@ public class Item {
 
     public Item() { }
 
+    public Item(ItemGroup itemGroup) {
+        this.setItemGroup(itemGroup);
+    }
+
     public Item(String name, String description, Double price, Boolean isAvailable, ItemGroup itemGroup) {
         this.setName(name);
         this.setDescription(description);
