@@ -2,6 +2,7 @@ package com.eloi.digitalmenu.controllers;
 
 import com.eloi.digitalmenu.domain.models.ItemGroup;
 import com.eloi.digitalmenu.domain.models.payloads.request.ItemGroupRequest;
+import com.eloi.digitalmenu.domain.models.payloads.response.ItemGroupListResponse;
 import com.eloi.digitalmenu.domain.models.payloads.response.MessageResponse;
 import com.eloi.digitalmenu.domain.services.ItemGroupService;
 
@@ -37,7 +38,7 @@ public class ItemGroupController {
 
     @GetMapping("")
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(itemGroupService.getAll());
+        return ResponseEntity.ok(new ItemGroupListResponse(itemGroupService.getAll()));
     }
 
     @PutMapping("/{id}")
