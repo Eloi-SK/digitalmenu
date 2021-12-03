@@ -3,6 +3,7 @@ package com.eloi.digitalmenu.controllers;
 import com.eloi.digitalmenu.domain.models.payloads.request.SigninRequest;
 import com.eloi.digitalmenu.domain.models.payloads.request.SignupRequest;
 import com.eloi.digitalmenu.domain.models.payloads.response.MessageResponse;
+import com.eloi.digitalmenu.domain.models.payloads.response.TokenResponse;
 import com.eloi.digitalmenu.domain.services.AuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class AuthController {
 
         try {
             String jwt = authService.login(signinRequest.getUsername(), signinRequest.getPassword());
-            return ResponseEntity.ok(jwt);
+            return ResponseEntity.ok(new TokenResponse(jwt));
         } catch (BadCredentialsException ex) {
             return ResponseEntity.badRequest().body(new MessageResponse("Credenciais inválidas."));
         }

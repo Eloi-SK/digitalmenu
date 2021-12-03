@@ -7,22 +7,22 @@ public class ItemResponse {
     private String name;
     private String description;
     private Double price;
-    private Boolean available;
+    private Boolean isAvailable;
 
     public ItemResponse(Item item) {
         setId(item.getId());
         setName(item.getName());
         setDescription(item.getDescription());
         setPrice(item.getPrice());
-        setAvailable(item.getIsAvailable());
+        setIsAvailable(item.getIsAvailable());
     }
 
-    public Boolean getAvailable() {
-        return available;
+    public Boolean getIsAvailable() {
+        return isAvailable;
     }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
+    public void setIsAvailable(Boolean available) {
+        this.isAvailable = available;
     }
 
     public Double getPrice() {
